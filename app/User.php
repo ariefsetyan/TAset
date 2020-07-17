@@ -36,4 +36,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pinjam()
+    {
+        return $this->hasMany('App\Peminjaman','id_karyawam','id');
+    }
+    public function distribusi()
+    {
+        return $this->hasMany('App\Distribusi','id_penerima','id');
+    }
 }

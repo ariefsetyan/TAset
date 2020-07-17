@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
 
-    {   
+    {
         $input = $request->all();
         $this->validate($request, [
             'email' => 'required|email',
@@ -51,7 +51,10 @@ class LoginController extends Controller
         {
             if (auth()->user()->is_admin == 1) {
                 return redirect()->route('admin.home');
-            }else{
+            }elseif (auth()->user()->is_admin == 2) {
+                return redirect()->route('kepala.home');
+            }
+            elseif (auth()->user()->is_admin == 0){
                 return redirect()->route('home');
             }
         }else{

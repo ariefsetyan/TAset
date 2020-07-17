@@ -23,11 +23,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        return view('karyawan.home');
+        return redirect('karyawan/form-peminjaman');
     }
 
     public function adminHome()
     {
-        return view('adminHome');
+//        return view('admin.adminHome');
+        return redirect('admin/daftar-barang');
+    }
+    public function kepalaHome()
+    {
+//        return view('kepala.kepalaHome');
+        return redirect('kepala/daftar-barang-masuk');
     }
 }
