@@ -22,13 +22,14 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="{{url('admin/proses-cari')}}" method="get">
+                        @csrf
                         <div class="box-body">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nama</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="var">
                                 </div>
                             </div>
                         </div>

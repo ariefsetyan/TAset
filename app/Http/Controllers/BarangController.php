@@ -19,6 +19,12 @@ class BarangController extends Controller
      */
     public function index()
     {
+        if (session('success')){
+        alert()->success('Success','Data berhasil di Perbaruhi');
+        }
+//        elseif (session('success')){
+//            alert()->success('Success','Data berhasil di Perbaruhi');
+//        }
         $datas = Barang::all();
         return view('admin/barang/table',compact('datas'));
     }
@@ -30,8 +36,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-
-        if (session('success_messege')){
+        if (session('success')){
             Alert::success('Success', session('success_messege'));
         }
         return view('admin/barang/form');
@@ -73,7 +78,7 @@ class BarangController extends Controller
                     'stok' => $request->stok]
             );
         }
-        return redirect()->back()->withSuccessMessege('Succsesfully added');
+        return redirect()->back()->withSuccess('Succsesfully');
     }
 
     /**
@@ -121,7 +126,7 @@ class BarangController extends Controller
         $data->serial = $serial;
         $data->stok = $request->stok;
         $data->save();
-        return redirect('daftar-barang');
+        return redirect('daftar-barang')->withSuccess('Successfully!');
     }
 
     /**
@@ -133,7 +138,7 @@ class BarangController extends Controller
     public function destroy($id)
     {
         $datas = Barang::find($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Successfully!');;
     }
 
     //kepala

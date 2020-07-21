@@ -32,7 +32,7 @@
                                 <th>estimasi</th>
                                 <th>julmah</th>
                                 <th>status</th>
-                                <th>tools</th>
+{{--                                <th>tools</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -47,30 +47,34 @@
                                         <td>
                                             <span class="label label-warning">{{$data->statusbarang->status}}</span>
                                         </td>
-                                        <td>
+{{--                                        <td>--}}
 {{--                                            <a href="{{url('edit-pinjam/'.$data->id)}}" type="button" class="btn btn-default btn-primary" >edit</a>--}}
-                                            <a href="{{url('karyawan/censel-peminjaman/'.$data->id)}}" type="button" class="btn btn-default btn-danger" >Censel</a>
-                                        </td>
+{{--                                            <a href="{{url('karyawan/censel-peminjaman/'.$data->id)}}" type="button" class="btn btn-default btn-danger" >Censel</a>--}}
+{{--                                        </td>--}}
                                     @elseif($data->id_status == 2)
                                         <td>
                                             <span class="label label-warning">{{$data->statusbarang->status}}</span>
                                         </td>
-                                        <td>
+{{--                                        <td>--}}
 {{--                                            <a href="#" type="button" class="btn btn-default btn-primary disabled" >edit</a>--}}
-                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>
-                                        </td>
+{{--                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>--}}
+{{--                                        </td>--}}
                                     @elseif($data->id_status == 3)
                                         <td><span class="label label-success">{{$data->statusbarang->status}}</span></td>
-                                        <td>
+{{--                                        <td>--}}
 {{--                                            <a href="#" type="button" class="btn btn-default btn-primary disabled" >edit</a>--}}
-                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>
-                                        </td>
+{{--                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>--}}
+{{--                                        </td>--}}
                                     @elseif($data->id_status == 4)
                                         <td><span class="label label-success">{{$data->statusbarang->status}}</span></td>
-                                        <td>
+{{--                                        <td>--}}
 {{--                                            <a href="#" type="button" class="btn btn-default btn-primary disabled" >edit</a>--}}
-                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>
-                                        </td>
+{{--                                            <a href="#" type="button" class="btn btn-default btn-danger disabled" >Cencel</a>--}}
+{{--                                        </td>--}}
+                                    @elseif($data->id_status == 5)
+                                        <td><span class="label label-success">{{$data->statusbarang->status}}</span></td>
+                                    @elseif($data->id_status == 6)
+                                        <td><span class="label label-success">{{$data->statusbarang->status}}</span></td>
                                     @endif
 
                                 </tr>

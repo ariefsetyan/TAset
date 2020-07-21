@@ -24,6 +24,9 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
     Route::post('proses-peminjaman','PeminjamanController@prosesPeminjaman');
     Route::get('daftar-peminjaman','PeminjamanController@Peminjaman');
     Route::post('proses-kembali','PeminjamanController@kembali');
+    Route::get('daftar-kembali','PeminjamanController@historyPeminjaman');
+    Route::get('cari','CariController@index');
+    Route::get('proses-cari','CariController@hasil');
 
     Route::get('daftar-pengajuan', 'DistribusiController@daftarPengajuan');
     Route::get('daftar-distribusi', 'DistribusiController@daftarPengajuanDsitribusi');

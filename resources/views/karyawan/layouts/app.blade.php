@@ -69,6 +69,9 @@
 <script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('assets/dist/js/demo.js')}}"></script>
+<!-- alert -->
+@include('sweetalert::alert')
+
 @stack('script')
 <script>
   $(document).ready(function () {

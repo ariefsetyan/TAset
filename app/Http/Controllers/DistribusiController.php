@@ -6,6 +6,7 @@ use App\Barang;
 use App\Distribusi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DistribusiController extends Controller
 {
@@ -31,6 +32,9 @@ class DistribusiController extends Controller
      */
     public function create()
     {
+        if (session('success')){
+            Alert::success('Success', 'Permintaan Sedang di Proses');
+        }
         $data = Barang::all();
         return view('karyawan/distribusi/formDistribusi',compact('data'));
     }
@@ -63,7 +67,7 @@ class DistribusiController extends Controller
 
             Distribusi::insert($data);
         }
-
+        return redirect()->back()->withSuccess('Successfully');
     }
 
     /**
@@ -115,6 +119,9 @@ class DistribusiController extends Controller
     //admin
     public function daftarPengajuan()
     {
+        if (session('success')){
+            alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+        }
         $datas = Distribusi::where('id_status','1')->get();
         return view('admin.distribusi.daftarDistribusi',compact('datas'));
     }
@@ -125,6 +132,7 @@ class DistribusiController extends Controller
         $datas->id_admin = Auth::user()->id;
         $datas->id_status = 2;
         $datas->save();
+        return redirect()->back()->whit('success','Proses berhasil');
     }
     public function daftarPengajuanDsitribusi()
     {
@@ -141,6 +149,9 @@ class DistribusiController extends Controller
 //kepala
     public function daftarPengajuanDistribusi()
     {
+        if (session('success')){
+            alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+        }
         $datas = Distribusi::where('id_status',2)->get();
         return view('kepala.distribusi',compact('datas'));
     }
@@ -150,7 +161,7 @@ class DistribusiController extends Controller
         $datas->id_kepala = Auth::user()->id;
         $datas->id_status = 3;
         $datas->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','proses success');
     }
     public function daftarDistribusi()
     {

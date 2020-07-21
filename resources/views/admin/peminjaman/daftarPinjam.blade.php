@@ -47,7 +47,7 @@
                                     <td>{{$pinjam->diskripsi_barang}}</td>
                                     <td>{{$pinjam->jumlah}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id="{{$pinjam->id}}">Proses</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id="{{$pinjam->id}}" data-id_barang="{{$pinjam->id_barang}}">Proses</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -92,7 +92,7 @@
                             <input type="text" class="form-control hidden" id="id" name="id">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control hidden" id="id" name="id_barang">
+                            <input type="text" class="form-control hidden" id="id_barang" name="id_barang">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">kodisi barang</label>
@@ -128,11 +128,13 @@
         $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var id = button.data('id') // Extract info from data-* attributes
+            var idBarang = button.data('id_barang') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             // modal.find('.modal-title').text('New message to ' + recipient)
             modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #id_barang').val(idBarang)
         })
     </script>
 @endpush

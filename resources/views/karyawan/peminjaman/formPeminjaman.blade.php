@@ -95,11 +95,8 @@
 @push('script')
 <script>
     $(document).ready(function(){
-
         var count = 1;
-
         dynamic_field(count);
-
         function dynamic_field(number)
         {
             html = '<tr>';

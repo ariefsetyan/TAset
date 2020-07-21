@@ -47,7 +47,7 @@
                                 <td>{{$data->stok}}</td>
                                 <td>
                                     <a href="{{url('admin/edit-barang/'.$data->id)}}" type="button" class="btn btn-default btn-primary" >edit</a>
-                                    <a href="{{url('admin/delete-barang/'.$data->id)}}" type="button" class="btn btn-default btn-danger" >delete</a>
+                                    <a href="{{url('admin/delete-barang/'.$data->id)}}" type="button" class="btn btn-default btn-danger delete-confirm" >delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -76,6 +76,7 @@
 
 @endsection
 @push('script')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script>
@@ -90,5 +91,21 @@
                 'autoWidth'   : false
             })
         })
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function(value) {
+                if (value) {
+                    window.location.href = url;
+                }
+            });
+        });
     </script>
+
 @endpush

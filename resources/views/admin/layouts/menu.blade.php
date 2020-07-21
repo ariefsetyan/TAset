@@ -5,7 +5,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="../widgets.html">
+                <a href="{{url('admin/cari')}}">
                     <i class="fa fa-th"></i> <span>Cari</span>
                 </a>
             </li>
@@ -47,6 +47,12 @@
                     </li>
                     <li><a href="{{url('admin/daftar-peminjaman')}}"><i class="fa fa-circle-o"></i> Daftar Peminjaman</a></li>
                 </ul>
+            </li>
+
+            <li>
+                <a href="{{url('admin/daftar-kembali')}}">
+                    <i class="fa fa-th"></i> <span>Daftar Pengembalian</span>
+                </a>
             </li>
 
             <li class="treeview">

@@ -29,7 +29,7 @@
                                 <th>nama baran</th>
                                 <th>tangal pinjam</th>
                                 <th>tujuan</th>
-                                <th>estimasi</th>
+                                <th>kembali</th>
                                 <th>Deskripsi</th>
                                 <th>tools</th>
                             </tr>
@@ -40,13 +40,13 @@
                                     <td>{{$pinjam->barang->nama}}</td>
                                     <td>{{$pinjam->tanggal_pinjam}}</td>
                                     <td>{{$pinjam->tujuan_pinjam}}</td>
-                                    <td>{{$pinjam->estimasi_waktu}}</td>
+                                    <td>{{$pinjam->updated_at}}</td>
                                     <td>{{$pinjam->diskripsi_barang}}</td>
-                                    <td>
-                                        <a href="{{url('proses-kembali/'.$pinjam->id)}}" type="button" class="btn btn-default">
-                                            Kembali
-                                        </a>
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        <a href="{{url('proses-kembali/'.$pinjam->id)}}" type="button" class="btn btn-default">--}}
+{{--                                            Kembali--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>

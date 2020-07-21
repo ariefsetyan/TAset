@@ -6,6 +6,7 @@ use App\Barang;
 use App\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanController extends Controller
 {
@@ -20,7 +21,7 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $datas = Peminjaman::where('id',Auth::user()->id)->get();
+        $datas = Peminjaman::where('id_karyawan',Auth::user()->id)->get();
         return view('karyawan.peminjaman.daftarPeminjaman',compact('datas'));
     }
 
@@ -31,6 +32,9 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
+        if (session('success')){
+            Alert::success('Success', 'Permintaan terkirim');
+        }
         $barangs = Barang::all();
         return view('karyawan.peminjaman.formPeminjaman',compact('barangs'));
     }
@@ -61,6 +65,7 @@ class PeminjamanController extends Controller
             );
             Peminjaman::insert($data);
         }
+        return redirect()->back()->withSuccess('Successfully!');
     }
 
     /**
@@ -122,6 +127,11 @@ class PeminjamanController extends Controller
      */
     public function daftarPengajuan()
     {
+        if (session('success')){
+            Alert::success('Success Title', 'Success Message');
+        }elseif (session('error')){
+            alert()->info('Info','Jumlah Stok Lebih Kecil dari Jumlah Pinjam');
+        }
         $data = Peminjaman::where('id_status',1)->get();
         return view('admin/peminjaman/daftarPinjam',compact('data'));
     }
@@ -131,30 +141,51 @@ class PeminjamanController extends Controller
         $data->id_status = 3;
         $kondisi = Barang::find($request->id_barang);
         $kondisi->kondisi = $request->kondisi;
-
-        $data->save();
-        $kondisi->save();
+        $stok = $kondisi['stok'];
+        $jumlah = $data['jumlah'];
+        $updateStok = $stok-$jumlah;
+        if ($updateStok <= $stok){
+            $data->save();
+            $kondisi->save();
+            return redirect()->back()->withSuccess('Successfully!');
+        }else{
+            return redirect()->back()->with('error','Stok Kurang');
+        }
 
     }
-//    public function historyPeminjaman()
-//    {
-//        $data = Peminjaman::where('id_status',5)->get();
-//        return view('admin/peminjaman/historiPeminjaman',compact('data'));
-//    }
+
+    public function historyPeminjaman()
+    {
+        $data = Peminjaman::where('id_status',6)->get();
+        return view('admin/peminjaman/historiPeminjaman',compact('data'));
+    }
 
     public function Peminjaman()
     {
+        if (session('success')){
+            alert()->success('Success','Lorem ipsum dolor sit amet.');
+        }
         $data = Peminjaman::where('id_status',5)->get();
         return view('admin/pengembalian/kembali',compact('data'));
     }
+
     public function kembali(Request $request)
     {
         $data = Peminjaman::find($request->id);
         $data->id_status = 6;
+        $jumlah = $data['jumlah'];
+
+        $barang = Barang::find($request->id_barang);
+        $stok = $barang['stok'];
+        $updateStok = $jumlah+$stok;
+        $barang->stok = $updateStok;
         $data->save();
-        $barang = Barang::where('id',$request->id_barang)->update(['kondisi' => $request->kondisi]);
-//        return view('admin/peminjaman/historiPeminjaman',compact('data'));
+        $barang->save();
+        return redirect()->back()->with('success','Data berhasil diperbarui');
     }
+
+//
+
 
     /**
      * proses for kepala.
